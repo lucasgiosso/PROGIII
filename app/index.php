@@ -38,7 +38,7 @@ $app->group('/usuarios', function (RouteCollectorProxy $group) {
   });
 
 $app->get('[/]', function (Request $request, Response $response) {    
-    $payload = json_encode(array("mensaje" => "Funciona"));
+    $payload = json_encode(array("mensaje" => "Funciona nuevamente"));
     
     $response->getBody()->write($payload);
     return $response->withHeader('Content-Type', 'application/json');
