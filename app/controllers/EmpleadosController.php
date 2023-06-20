@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 require_once './models/Empleados.php'; 
+=======
+require_once './models/Empleados.php';
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 //srequire_once './interfaces/IApiUsable.php';
 
 
