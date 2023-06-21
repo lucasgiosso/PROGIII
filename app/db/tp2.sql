@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2023 a las 01:22:44
+-- Tiempo de generación: 21-06-2023 a las 03:45:09
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -43,7 +43,12 @@ INSERT INTO `empleados` (`id`, `rol`, `nombre`, `fechaBaja`, `fechaSuspension`) 
 (1, 'Mozo', 'Garrick', NULL, NULL),
 (2, 'Cocinero', 'Spirit', NULL, NULL),
 (3, 'Bartender', 'Westmacott', NULL, NULL),
-(4, 'Cervecero', 'Newgrosh', NULL, NULL);
+(4, 'Cervecero', 'Newgrosh', NULL, NULL),
+(5, 'Bartender', 'Juan', '0000-00-00', '0000-00-00'),
+(6, 'Bartender', 'Pedro', '0000-00-00', '0000-00-00'),
+(7, 'Bartender', 'Sergio', NULL, NULL),
+(8, 'Bartender', 'Federico', NULL, NULL),
+(9, 'Bartender', 'Alberto', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -99,6 +104,13 @@ CREATE TABLE `pedidos` (
   `fechaBaja` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `codigoComanda`, `productos_id`, `empleado_id`, `precio`, `cantidad`, `tiempoEstimado`, `estado`, `fechaBaja`) VALUES
+(1, 0, 1, 2, 0, 2, 30, 'Pendiente', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -120,7 +132,8 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `rol`) VALUES
 (1, 'Milanesa a caballo', 2500, 'Cocinero'),
 (2, 'Hamburguesa de garbanzo', 1500, 'Cocinero'),
 (3, 'Corona', 800, 'Cervecero'),
-(4, 'Daikiri', 1200, 'Bartender');
+(4, 'Daikiri', 1200, 'Bartender'),
+(5, 'Gin Tonic', 1500, 'Bartender');
 
 --
 -- Índices para tablas volcadas
@@ -148,7 +161,9 @@ ALTER TABLE `mesas`
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `productos_id` (`productos_id`),
+  ADD UNIQUE KEY `empleado_id` (`empleado_id`);
 
 --
 -- Indices de la tabla `productos`
@@ -164,7 +179,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -182,13 +197,24 @@ ALTER TABLE `mesas`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`id`),
+  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`productos_id`) REFERENCES `productos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
