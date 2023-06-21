@@ -12,7 +12,7 @@ class Empleados
     public function crearEmpleado()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (rol, nombre, fechaBaja, fechaSuspension) VALUES (:rol, :nombre, :precio, :fechaBaja, :fechaSuspension)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (rol, nombre, fechaBaja, fechaSuspension) VALUES (:rol, :nombre, :fechaBaja, :fechaSuspension)");
         
         $consulta->bindValue(':rol', $this->rol, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
@@ -38,7 +38,7 @@ class Empleados
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM empleados WHERE id = :id");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, rol, nombre FROM empleados WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
 

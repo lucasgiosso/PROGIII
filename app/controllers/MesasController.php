@@ -1,30 +1,22 @@
 <?php
-require_once './models/Empleados.php'; 
-//srequire_once './interfaces/IApiUsable.php';
 
+require_once './models/Mesas.php';
 
-class EmpleadosController extends Empleados 
+class MesasController extends Mesas 
 {
 
-    public function CargarUno($request, $response, $args)
+    public function CargarUna($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 
-        $rol = $parametros['rol'];
-        $nombre = $parametros['nombre'];
-        //$fechaBaja = $parametros['fechaBaja'];
-        //$fechaSuspension = $parametros['fechaSuspension'];
+        $estado_id = $parametros['estado_id'];
 
-        // Creamos el pedido
-        $empleados = new Empleados();
-        $empleados->rol = $rol;
-        $empleados->nombre = $nombre;
-        //$empleados->fechaBaja = $fechaBaja;
-        //$empleados->fechaSuspension = $fechaSuspension;
-        
-        $empleados->crearEmpleado();
+        $mesas = new Mesas();
+        $mesas->estado_id = $estado_id;
 
-        $payload = json_encode(array("mensaje" => "Empleado dado de alta"));
+        $mesas->crearMesa();
+
+        $payload = json_encode(array("mensaje" => "Mesa creada"));
 
         $response->getBody()->write($payload);
         
@@ -34,9 +26,9 @@ class EmpleadosController extends Empleados
 
     public function TraerTodos($request, $response, $args)
     {
-        $lista = Empleados::obtenerTodosEmpleados();
+        $lista = Mesas::obtenerTodasMesas();
 
-        $payload = json_encode(array("listadoEmpleados" => $lista));
+        $payload = json_encode(array("listadoMesas" => $lista));
 
         $response->getBody()->write($payload);
         return $response
@@ -47,7 +39,7 @@ class EmpleadosController extends Empleados
     {
         $id = $args['id'];
         
-        $id = Empleados::obtenerEmpleado($id);
+        $id = Mesas::obtenerMesa($id);
         $payload = json_encode($id);
 
         $response->getBody()->write($payload);
@@ -55,16 +47,15 @@ class EmpleadosController extends Empleados
           ->withHeader('Content-Type', 'application/json');
     }
 
-
     public function ModificarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 
         $id = $parametros['id'];
 
-        Empleados::modificarEmpleado($id);
+        Mesas::modificarMesa($id);
 
-        $payload = json_encode(array("mensaje" => "Empleado modificado"));
+        $payload = json_encode(array("mensaje" => "Mesa modificado"));
 
         $response->getBody()->write($payload);
         return $response
@@ -77,9 +68,9 @@ class EmpleadosController extends Empleados
 
         $id = $parametros['id'];
 
-        Empleados::borrarEmpleado($id);
+        Mesas::borrarMesa($id);
 
-        $payload = json_encode(array("mensaje" => "Empleado borrado con exito"));
+        $payload = json_encode(array("mensaje" => "Mesa borrado con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -89,5 +80,3 @@ class EmpleadosController extends Empleados
 
 
 }
-
-?>

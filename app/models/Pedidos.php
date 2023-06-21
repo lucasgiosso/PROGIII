@@ -41,9 +41,13 @@ class Pedidos
     public static function obtenerPedido($id)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM pedidos WHERE id = :id");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, codigoComanda, productos_id, empleado_id, precio, cantidad, tiempoEstimado, estado FROM pedidos WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
+
+//         SELECT Ped.* from Comanda C InnerJoin Pedidos Ped on C.codigo = Ped.CodigoComanda
+//                         InnerJoin Productos Prod on Prod.Id = Ped.IdProducto
+//          WHERE C.Estado = "Pendiente" and Prod.Rol = "Cocinero"
 
         return $consulta->fetchObject('Pedidos');
     }

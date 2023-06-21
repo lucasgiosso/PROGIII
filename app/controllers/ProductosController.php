@@ -19,13 +19,35 @@ class ProductosController extends Productos
         $productos->precio = $precio;
         $productos->rol = $rol;
 
-
         $productos->crearProducto();
 
         $payload = json_encode(array("mensaje" => "Producto creado"));
 
         $response->getBody()->write($payload);
         
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
+    public function TraerTodos($request, $response, $args)
+    {
+        $lista = Productos::obtenerTodosProductos();
+
+        $payload = json_encode(array("listadoProductos" => $lista));
+
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
+    public function TraerUno($request, $response, $args)
+    {
+        $id = $args['id'];
+
+        $id = Productos::obtenerProducto($id);
+        $payload = json_encode($id);
+
+        $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }

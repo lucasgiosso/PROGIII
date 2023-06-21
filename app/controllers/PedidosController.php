@@ -11,7 +11,6 @@ class PedidosController extends Empleados
 
         $productos_id = $parametros['productos_id'];
         $empleado_id = $parametros['empleado_id'];
-        $precio = $parametros['precio'];
         $cantidad = $parametros['cantidad'];
         $tiempoEstimado = $parametros['tiempoEstimado'];
         $estado = $parametros['estado'];
@@ -20,7 +19,7 @@ class PedidosController extends Empleados
         $pedidos = new Pedidos();
         $pedidos->productos_id = $productos_id;
         $pedidos->empleado_id = $empleado_id;
-        $pedidos->precio = $precio;
+        $pedidos->precio = Productos::obtenerTodosProductos($productos_id);
         $pedidos->cantidad = $cantidad;
         $pedidos->tiempoEstimado = $tiempoEstimado;
         $pedidos->estado = $estado;
@@ -31,6 +30,29 @@ class PedidosController extends Empleados
 
         $response->getBody()->write($payload);
         
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
+    public function TraerTodos($request, $response, $args)
+    {
+        $lista = Pedidos::obtenerTodosPedidos();
+
+        $payload = json_encode(array("listadoPedidos" => $lista));
+
+        $response->getBody()->write($payload);
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+    }
+
+    public function TraerUno($request, $response, $args)
+    {
+        $id = $args['id'];
+        
+        $id = Pedidos::obtenerPedido($id);
+        $payload = json_encode($id);
+
+        $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }

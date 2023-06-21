@@ -36,7 +36,7 @@ class Productos
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM productos WHERE id = :id");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, precio, rol FROM productos WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
 
         $consulta->execute();
