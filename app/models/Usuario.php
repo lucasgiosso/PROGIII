@@ -5,6 +5,11 @@ class Usuario
     public $id;
     public $usuario;
     public $clave;
+    public $isAdmin;
+    public $tipoUsuario;
+    public $estado;
+    public $fechaInicio;
+    public $fechaFinalizacion;
 
     public function crearUsuario()
     {
@@ -21,7 +26,7 @@ class Usuario
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, usuario, clave FROM usuarios");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM usuario"); //("SELECT id, usuario, clave FROM usuarios")
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Usuario');
@@ -37,7 +42,7 @@ class Usuario
         return $consulta->fetchObject('Usuario');
     }
 
-    public static function modificarUsuario()
+    public function modificarUsuario()
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDato->prepararConsulta("UPDATE usuarios SET usuario = :usuario, clave = :clave WHERE id = :id");

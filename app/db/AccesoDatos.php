@@ -1,4 +1,5 @@
 <?php
+
 class AccesoDatos
 {
     private static $objAccesoDatos;
@@ -17,7 +18,8 @@ class AccesoDatos
 
     public static function obtenerInstancia()
     {
-        if (!isset(self::$objAccesoDatos)) {
+        if (!isset(self::$objAccesoDatos)) 
+        {
             self::$objAccesoDatos = new AccesoDatos();
         }
         return self::$objAccesoDatos;
@@ -31,6 +33,55 @@ class AccesoDatos
     public function obtenerUltimoId()
     {
         return $this->objetoPDO->lastInsertId();
+    }
+
+    public static function ObtenerConsulta($sql, $clase=null)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta($sql);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_CLASS, $clase);
+    }
+
+    public static function retornarObjetoPorCampo($valor, $campo, $tabla, $clase)
+    {
+        $sql = "SELECT * FROM $tabla WHERE $tabla.$campo = '$valor'";
+
+        return AccesoDatos::ObtenerConsulta($sql, $clase);
+    }
+
+    public static function retornarObjetoActivo($id, $tabla, $clase)
+    {
+        $sql = "SELECT * FROM $tabla WHERE $id = $tabla.id AND $tabla.activo = 1";
+        
+        return AccesoDatos::ObtenerConsulta($sql, $clase);
+    }
+
+    public static function retornarActivoObjetoPorCampo($valor, $campo, $tabla, $clase)
+    {
+        $sql = "SELECT * FROM $tabla WHERE $tabla.$campo = '$valor' AND $tabla.activo = 1";
+
+        return AccesoDatos::ObtenerConsulta($sql, $clase);
+    }
+
+    public static function ObtenerPedidosXArea($area)
+    {
+        $sql = "SELECT p.id, pp.pedido_id, AS pedido, pr.nombre AS producto, pp.cantidad AS cantidad, 
+                CASE
+                WHEN pp.estado = 0 THEN 'Pendiente'
+                WHEN pp.estado = 1 THEN 'En preparacion'
+                WHEN pp.estado = 2 THEN 'Listo'
+                ELSE 'Error' END AS Estado
+                FROM comanda pp
+                LEFT JOIN productos pr ON pp.producto_id = pr.id
+                LEFT JOIN area a ON pr.area_id = a.id
+                WHERE a.id = $area AND pp.estado < 2
+                ORDER BY pp.pedido_id";
+
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta($sql);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_CLASS);
     }
 
     public function __clone()
