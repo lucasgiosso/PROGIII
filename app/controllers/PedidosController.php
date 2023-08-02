@@ -48,7 +48,6 @@ class PedidosController extends Empleados
 
         $productos_id = $parametros['productos_id'];
         $empleado_id = $parametros['empleado_id'];
-        $precio = $parametros['precio'];
         $cantidad = $parametros['cantidad'];
         $tiempoEstimado = $parametros['tiempoEstimado'];
         $estado = $parametros['estado'];
@@ -57,7 +56,7 @@ class PedidosController extends Empleados
         $pedidos = new Pedidos();
         $pedidos->productos_id = $productos_id;
         $pedidos->empleado_id = $empleado_id;
-        $pedidos->precio = $precio;
+        $pedidos->precio = Productos::obtenerTodosProductos($productos_id);
         $pedidos->cantidad = $cantidad;
         $pedidos->tiempoEstimado = $tiempoEstimado;
         $pedidos->estado = $estado;
@@ -74,6 +73,9 @@ class PedidosController extends Empleados
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
     public function TraerTodos($request, $response, $args)
     {
         $lista = Pedidos::obtenerTodosPedidos();
@@ -97,8 +99,11 @@ class PedidosController extends Empleados
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public static function ModificarUno($request, $response, $args)
 =======
+=======
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
     public function ModificarUno($request, $response, $args)
 >>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     {

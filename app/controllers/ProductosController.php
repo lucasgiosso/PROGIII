@@ -36,8 +36,11 @@ class ProductosController extends Productos
         $productos->precio = $precio;
         $productos->rol = $rol;
 
+<<<<<<< HEAD
 
 >>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
+=======
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
         $productos->crearProducto();
 
         $payload = json_encode(array("mensaje" => "Producto creado"));
@@ -49,6 +52,9 @@ class ProductosController extends Productos
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
     public function TraerTodos($request, $response, $args)
     {
         $lista = Productos::obtenerTodosProductos();
@@ -72,8 +78,11 @@ class ProductosController extends Productos
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
+=======
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
     public function ModificarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();

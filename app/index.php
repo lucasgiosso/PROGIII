@@ -17,11 +17,17 @@ require_once './middlewares/AuthenticadorJWT.php';
 require_once './middlewares/VerificadorPMW.php';
 
 require_once './controllers/EmpleadosController.php';
+<<<<<<< HEAD
 require_once './controllers/EncuestaController.php';
 require_once './controllers/MesasController.php';
 require_once './controllers/PedidosController.php';
 require_once './controllers/ProductosController.php';
 require_once './controllers/LogIngresosController.php';
+=======
+require_once './controllers/ProductosController.php';
+require_once './controllers/PedidosController.php';
+require_once './controllers/MesasController.php';
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -43,6 +49,7 @@ $app->post('/prueba/login[/]', \LogIngresosController::class . ':CrearTokenLogin
 $app->group('/empleados', function (RouteCollectorProxy $group) {
     $group->get('[/]', \EmpleadosController::class . ':TraerTodos');
     $group->get('/{id}', \EmpleadosController::class . ':TraerUno');
+<<<<<<< HEAD
     $group->get('/pendientes/mozo', \EmpleadosController::class . ':PendientesMozo') ->add(\VerificadorPMW::class . ':ValidarMozo');
     $group->get('/pendientes/cocinero', \EmpleadosController::class . ':PendientesCocinero')->add(\VerificadorPMW::class . ':ValidarCocinero'); 
     $group->get('/enPreparacion/cocinero', \EmpleadosController::class . ':EnPreparacionCocinero')->add(\VerificadorPMW::class . ':ValidarCocinero');
@@ -101,6 +108,29 @@ $app->group('/encuestas', function (RouteCollectorProxy $group) {
   $group->post('/responder/encuesta', \EncuestasController::class . ':CargarUna');
   $group->get('/comentarios/socios', \EncuestasController::class . ':TraerBuenosComentarios')->add(\VerificadorPMW::class . ':ValidarSocio'); 
 });
+=======
+    $group->post('[/]', \EmpleadosController::class . ':CargarUno');
+  });
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
+
+$app->group('/productos', function (RouteCollectorProxy $group) {
+    $group->get('[/]', \ProductosController::class . ':TraerTodos');
+    $group->get('/{id}', \ProductosController::class . ':TraerUno');
+    $group->post('[/]', \ProductosController::class . ':CargarUno');
+  });
+
+$app->group('/pedidos', function (RouteCollectorProxy $group) {
+    $group->get('[/]', \PedidosController::class . ':TraerTodos');
+    $group->get('/{id}', \PedidosController::class . ':TraerUno');
+    $group->post('[/]', \PedidosController::class . ':CargarUno');
+  });
+
+$app->group('/mesas', function (RouteCollectorProxy $group) {
+    $group->get('[/]', \MesasController::class . ':TraerTodos');
+    $group->get('/{id}', \MesasController::class . ':TraerUno');
+    $group->post('[/]', \MesasController::class . ':CargarUna');
+  });
+
 
 $app->get('[/]', function (Request $request, Response $response) {    
     $payload = json_encode(array("mensaje" => "La Comanda 2023"));

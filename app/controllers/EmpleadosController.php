@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require_once './models/Empleados.php';
 <<<<<<< HEAD
 require_once './models/CSV.php'; 
@@ -40,6 +41,9 @@ class EmpleadosController extends Empleados
       return $response->withHeader('Content-Type', 'application/json');
   }
 =======
+=======
+require_once './models/Empleados.php'; 
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
 //srequire_once './interfaces/IApiUsable.php';
 
 
@@ -70,16 +74,21 @@ class EmpleadosController extends Empleados
 =======
         $rol = $parametros['rol'];
         $nombre = $parametros['nombre'];
-        $fechaBaja = $parametros['fechaBaja'];
-        $fechaSuspension = $parametros['fechaSuspension'];
+        //$fechaBaja = $parametros['fechaBaja'];
+        //$fechaSuspension = $parametros['fechaSuspension'];
 
         // Creamos el pedido
         $empleados = new Empleados();
         $empleados->rol = $rol;
         $empleados->nombre = $nombre;
+<<<<<<< HEAD
         $empleados->fechaBaja = $fechaBaja;
         $empleados->fechaSuspension = $fechaSuspension;
 >>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
+=======
+        //$empleados->fechaBaja = $fechaBaja;
+        //$empleados->fechaSuspension = $fechaSuspension;
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
         
         $empleados->crearEmpleado();
 
@@ -92,6 +101,9 @@ class EmpleadosController extends Empleados
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
     public function TraerTodos($request, $response, $args)
     {
         $lista = Empleados::obtenerTodosEmpleados();
@@ -115,8 +127,12 @@ class EmpleadosController extends Empleados
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
+=======
+
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
     public function ModificarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();

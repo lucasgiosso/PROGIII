@@ -7,6 +7,7 @@ class MesasController extends Mesas
 
     public function CargarUna($request, $response, $args)
     {
+<<<<<<< HEAD
       $parametros = $request->getParsedBody();
 
       $estado_id = $parametros['estado_id'];
@@ -23,6 +24,23 @@ class MesasController extends Mesas
       
       return $response
         ->withHeader('Content-Type', 'application/json');
+=======
+        $parametros = $request->getParsedBody();
+
+        $estado_id = $parametros['estado_id'];
+
+        $mesas = new Mesas();
+        $mesas->estado_id = $estado_id;
+
+        $mesas->crearMesa();
+
+        $payload = json_encode(array("mensaje" => "Mesa creada"));
+
+        $response->getBody()->write($payload);
+        
+        return $response
+          ->withHeader('Content-Type', 'application/json');
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
     }
 
     public function TraerTodos($request, $response, $args)
@@ -78,6 +96,7 @@ class MesasController extends Mesas
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public function MesaComiendo($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -131,6 +150,8 @@ class MesasController extends Mesas
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
+=======
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
 
 
 }

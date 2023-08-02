@@ -94,6 +94,7 @@ class Pedidos
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         $consulta = $objAccesoDatos->prepararConsulta(" SELECT P.pedidoCliente_id, P.mesa_id, P.cliente, P.tiempoEstimado,Pr.nombreProducto, Pr.precio, P.cantidad, E.nombre, Es.descripcion
                                                         FROM pedidos P 
@@ -126,8 +127,15 @@ class Pedidos
         
 =======
         $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM pedidos WHERE id = :id");
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, codigoComanda, productos_id, empleado_id, precio, cantidad, tiempoEstimado, estado FROM pedidos WHERE id = :id");
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
         $consulta->execute();
+
+//         SELECT Ped.* from Comanda C InnerJoin Pedidos Ped on C.codigo = Ped.CodigoComanda
+//                         InnerJoin Productos Prod on Prod.Id = Ped.IdProducto
+//          WHERE C.Estado = "Pendiente" and Prod.Rol = "Cocinero"
 
         return $consulta->fetchObject('Pedidos');
     }

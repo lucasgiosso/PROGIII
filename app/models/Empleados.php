@@ -26,6 +26,7 @@ class Empleados
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 <<<<<<< HEAD
+<<<<<<< HEAD
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (clave, nombre, rol, fechaBaja, fechaSuspension, tipo) VALUES (:clave, :nombre, :rol, :fechaBaja, :fechaSuspension, :tipo)");
         
         //$claveHash = password_hash($this->clave, PASSWORD_DEFAULT);
@@ -37,6 +38,9 @@ class Empleados
         $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
 =======
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (rol, nombre, fechaBaja, fechaSuspension) VALUES (:rol, :nombre, :precio, :fechaBaja, :fechaSuspension)");
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (rol, nombre, fechaBaja, fechaSuspension) VALUES (:rol, :nombre, :fechaBaja, :fechaSuspension)");
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
         
         $consulta->bindValue(':rol', $this->rol, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
@@ -97,10 +101,14 @@ class Empleados
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $consulta = $objAccesoDatos->prepararConsulta("SELECT id, clave, rol, nombre, tipo FROM empleados WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
 =======
         $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM empleados WHERE id = :id");
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, rol, nombre FROM empleados WHERE id = :id");
+>>>>>>> 561cd04d31978d7eb71751c2b67fc5f7eb3abf09
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
 >>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->execute();
