@@ -1,9 +1,13 @@
 <?php
 
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Process;
 
 require_once './models/Productos.php';
 require_once './models/CSV.php';
+=======
+require_once './models/Productos.php';
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
 class ProductosController extends Productos 
 {
@@ -12,16 +16,28 @@ class ProductosController extends Productos
     {
         $parametros = $request->getParsedBody();
 
+<<<<<<< HEAD
         $nombreProducto = $parametros['nombreProducto'];
+=======
+        $nombre = $parametros['nombre'];
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $precio = $parametros['precio'];
         $rol = $parametros['rol'];
 
         // Creamos el pedido
         $productos = new Productos();
+<<<<<<< HEAD
         $productos->nombreProducto = $nombreProducto;
         $productos->precio = $precio;
         $productos->rol = $rol;
 
+=======
+        $productos->nombre = $nombre;
+        $productos->precio = $precio;
+        $productos->rol = $rol;
+
+
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $productos->crearProducto();
 
         $payload = json_encode(array("mensaje" => "Producto creado"));
@@ -32,6 +48,7 @@ class ProductosController extends Productos
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public function TraerTodos($request, $response, $args)
     {
         $lista = Productos::obtenerTodosProductos();
@@ -55,6 +72,8 @@ class ProductosController extends Productos
           ->withHeader('Content-Type', 'application/json');
     }
 
+=======
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     public function ModificarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -85,6 +104,7 @@ class ProductosController extends Productos
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public function ExportarProductos($request, $response, $args)
     {
         $nombreArchivo = "productos.csv";
@@ -118,6 +138,8 @@ class ProductosController extends Productos
           ->withHeader('Content-Type', 'application/json');
     }
 
+=======
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
 
 }

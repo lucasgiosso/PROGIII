@@ -1,11 +1,18 @@
 <?php
 
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Process;
 
 class Productos
 {
     public $id; //1 
     public $nombreProducto; // hamburg
+=======
+class Productos
+{
+    public $id; //1 
+    public $nombre; // hamburg
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     public $precio; // 1400
     public $rol;  // cocinero
 
@@ -13,9 +20,15 @@ class Productos
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
+<<<<<<< HEAD
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombreProducto, precio, rol) VALUES (:nombreProducto, :precio, :rol)");
         
         $consulta->bindValue(':nombreProducto', $this->nombreProducto, PDO::PARAM_STR);
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombre, precio, rol) VALUES (:nombre, :precio, :rol)");
+        
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
         $consulta->bindValue(':rol', $this->rol, PDO::PARAM_STR);
 
@@ -38,22 +51,36 @@ class Productos
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
+<<<<<<< HEAD
         $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombreProducto, precio, rol FROM productos WHERE id = :id");
         
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM productos WHERE id = :id");
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->bindValue(':id', $id, PDO::PARAM_STR);
 
         $consulta->execute();
 
+<<<<<<< HEAD
         return $consulta->fetchAll(PDO::FETCH_OBJ);
+=======
+        return $consulta->fetchObject('Productos');
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     }
 
     public function modificarProducto()
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
 
+<<<<<<< HEAD
         $consulta = $objAccesoDato->prepararConsulta("UPDATE productos SET nombreProducto = :nombreProducto, precio = :precio WHERE id = :id");
         
         $consulta->bindValue(':nombreProducto', $this->nombreProducto, PDO::PARAM_STR);
+=======
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE productos SET nombre = :nombre, precio = :precio WHERE id = :id");
+        
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
 
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
@@ -76,6 +103,7 @@ class Productos
         $consulta->execute();
     }
 
+<<<<<<< HEAD
     public static function ImportarProducto($archivo)
     {
         $array = CSV::LeerCSV($archivo);
@@ -111,5 +139,7 @@ class Productos
         }
     }
 
+=======
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 }
 ?>

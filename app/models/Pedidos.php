@@ -3,22 +3,33 @@
 class Pedidos
 {
     public $id;
+<<<<<<< HEAD
     public $pedidoCliente_id;
     public $mesa_id;
     public $cliente;
     public $foto;
+=======
+    public $codigoComanda;
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     public $productos_id;
     public $empleado_id;
     public $precio;
     public $cantidad;
     public $tiempoEstimado;
+<<<<<<< HEAD
     public $estado_id;
     public $fechaBaja;
     public $fechaPedido;
+=======
+    public $estado;
+    public $fechaBaja;
+
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
     public function crearPedido()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
+<<<<<<< HEAD
 
         $precio_ = 0;
         
@@ -42,6 +53,16 @@ class Pedidos
         $consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_STR);
         $consulta->bindValue(':fechaPedido', $this->fechaPedido, PDO::PARAM_STR);
         $consulta->bindValue(':estado_id', $this->estado_id, PDO::PARAM_INT);
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO pedidos (productos_id, empleado_id, precio, cantidad, tiempoEstimado, estado) VALUES (:productos_id, :empleado_id, :precio, :cantidad, :tiempoEstimado, :estado)");
+        
+        $consulta->bindValue(':productos_id', $this->productos_id, PDO::PARAM_STR);
+        $consulta->bindValue(':empleado_id', $this->empleado_id, PDO::PARAM_STR);
+        $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
+        $consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_STR);
+        $consulta->bindValue(':tiempoEstimado', $this->tiempoEstimado, PDO::PARAM_STR);
+        $consulta->bindValue(':estado', $this->estado, PDO::PARAM_STR);
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -50,6 +71,7 @@ class Pedidos
     public static function obtenerTodosPedidos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
+<<<<<<< HEAD
     
         $consulta = $objAccesoDatos->prepararConsulta(" SELECT P.pedidoCliente_id, P.mesa_id, P.cliente, P.tiempoEstimado, Pr.nombreProducto, Pr.precio, P.cantidad, E.nombre, Es.descripcion
                                                         FROM pedidos P 
@@ -60,11 +82,18 @@ class Pedidos
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_OBJ);
 
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM pedidos");
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedidos');
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     }
 
     public static function obtenerPedido($id)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
+<<<<<<< HEAD
 
         $consulta = $objAccesoDatos->prepararConsulta(" SELECT P.pedidoCliente_id, P.mesa_id, P.cliente, P.tiempoEstimado,Pr.nombreProducto, Pr.precio, P.cantidad, E.nombre, Es.descripcion
                                                         FROM pedidos P 
@@ -95,6 +124,24 @@ class Pedidos
         $consulta->bindValue(':precioFinal', $pedidos->precioFinal, PDO::PARAM_STR);
         $consulta->bindValue(':id', $pedidos->id, PDO::PARAM_INT);
         
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM pedidos WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchObject('Pedidos');
+    }
+
+    public function modificarPedido()
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE pedidos SET productos_id = :productos_id, cantidad = :cantidad, precio = :precio  WHERE id = :id");
+        $consulta->bindValue(':productos_id', $this->productos_id, PDO::PARAM_STR);
+        $consulta->bindValue(':cantidad', $this->cantidad, PDO::PARAM_STR);
+        $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->execute();
 
     }
@@ -102,6 +149,7 @@ class Pedidos
     public static function borrarPedido($id)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
+<<<<<<< HEAD
 
         $consulta = $objAccesoDato->prepararConsulta("DELETE FROM pedidos WHERE id = :id");
         $fecha = new DateTime(date("d-m-Y"));
@@ -253,6 +301,15 @@ class Pedidos
   }
 
     
+=======
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE pedidos SET fechaBaja = :fechaBaja WHERE id = :id");
+        $fecha = new DateTime(date("d-m-Y"));
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $consulta->bindValue(':fechaBaja', date_format($fecha, 'Y-m-d H:i:s'));
+        $consulta->execute();
+    }
+
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 }
 
 

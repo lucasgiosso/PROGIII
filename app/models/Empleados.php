@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 
 class Empleados
 {
@@ -10,10 +11,21 @@ class Empleados
     public $fechaBaja;
     public $fechaSuspension;
     public $tipo;
+=======
+class Empleados
+{
+    public $id;
+    public $rol;
+    public $nombre;
+    public $fechaBaja;
+    public $fechaSuspension;
+
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
     public function crearEmpleado()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
+<<<<<<< HEAD
         $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (clave, nombre, rol, fechaBaja, fechaSuspension, tipo) VALUES (:clave, :nombre, :rol, :fechaBaja, :fechaSuspension, :tipo)");
         
         //$claveHash = password_hash($this->clave, PASSWORD_DEFAULT);
@@ -23,12 +35,21 @@ class Empleados
         $consulta->bindValue(':fechaBaja', $this->fechaBaja, PDO::PARAM_STR);
         $consulta->bindValue(':fechaSuspension', $this->fechaSuspension, PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO empleados (rol, nombre, fechaBaja, fechaSuspension) VALUES (:rol, :nombre, :precio, :fechaBaja, :fechaSuspension)");
+        
+        $consulta->bindValue(':rol', $this->rol, PDO::PARAM_STR);
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+        $consulta->bindValue(':fechaBaja', $this->fechaBaja, PDO::PARAM_STR);
+        $consulta->bindValue(':fechaSuspension', $this->fechaSuspension, PDO::PARAM_STR);
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
     }
 
+<<<<<<< HEAD
     public static function crearLog($id, $rol, $tipo)
     {
 
@@ -59,6 +80,8 @@ class Empleados
 
     }
 
+=======
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     public static function obtenerTodosEmpleados()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
@@ -73,8 +96,13 @@ class Empleados
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
 
+<<<<<<< HEAD
         $consulta = $objAccesoDatos->prepararConsulta("SELECT id, clave, rol, nombre, tipo FROM empleados WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+=======
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id FROM empleados WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_STR);
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->execute();
 
         return $consulta->fetchObject('Empleados');
@@ -84,11 +112,17 @@ class Empleados
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
 
+<<<<<<< HEAD
         $consulta = $objAccesoDato->prepararConsulta("UPDATE empleados SET clave = :clave, rol = :rol, nombre = :nombre, fechaBaja = :fechaBaja, fechaSuspension = :fechaSuspension  WHERE id = :id");
         
         $consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
         $consulta->bindValue(':rol', $this->rol, PDO::PARAM_STR);
+=======
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE empleados SET rol = :rol, nombre = :nombre, fechaBaja = :fechaBaja, fechaSuspension = :fechaSuspension  WHERE id = :id");
+        $consulta->bindValue(':rol', $this->rol, PDO::PARAM_STR);
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         $consulta->bindValue(':fechaBaja', $this->fechaBaja, PDO::PARAM_STR);
         $consulta->bindValue(':fechaSuspension', $this->fechaSuspension, PDO::PARAM_STR);
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
@@ -107,6 +141,7 @@ class Empleados
         $consulta->execute();
     }
 
+<<<<<<< HEAD
     public function obtenerPendientesCocinero() 
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
@@ -252,4 +287,45 @@ class Empleados
     }
 }
 
+=======
+
+
+
+
+
+
+
+
+
+
+
+    public function obtenerDiasHorariosEmpleados($request, $response, $args) 
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+
+        $query = "SELECT id_empleado, fecha, hora FROM ingresos_empleados";
+        
+        $resultado = $objAccesoDatos->query($query);
+      
+        $ingresos = array();
+
+        while ($fila = $resultado->fetch_assoc()) {
+                                                    $idEmpleado = $fila["id_empleado"];
+                                                    $fecha = $fila["fecha"];
+                                                    $hora = $fila["hora"];
+      
+          $ingresos[$idEmpleado][] = array("fecha" => $fecha, "hora" => $hora);
+        }
+      
+        $objAccesoDatos->close();
+      
+        return $ingresos;
+      }
+    
+}
+
+
+
+
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 ?>

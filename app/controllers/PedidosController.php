@@ -2,12 +2,17 @@
 
 require_once './models/Pedidos.php';
 
+<<<<<<< HEAD
 class PedidosController 
+=======
+class PedidosController extends Empleados 
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 {
 
     public function CargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
+<<<<<<< HEAD
         $longitud = 5;
 
         $mesa_id = $parametros['mesa_id'];
@@ -39,6 +44,28 @@ class PedidosController
         $pedidos->crearPedido();
 
         $payload = json_encode(array("mensaje" => "Pedido creado"));
+=======
+
+        $productos_id = $parametros['productos_id'];
+        $empleado_id = $parametros['empleado_id'];
+        $precio = $parametros['precio'];
+        $cantidad = $parametros['cantidad'];
+        $tiempoEstimado = $parametros['tiempoEstimado'];
+        $estado = $parametros['estado'];
+
+        // Creamos el pedido
+        $pedidos = new Pedidos();
+        $pedidos->productos_id = $productos_id;
+        $pedidos->empleado_id = $empleado_id;
+        $pedidos->precio = $precio;
+        $pedidos->cantidad = $cantidad;
+        $pedidos->tiempoEstimado = $tiempoEstimado;
+        $pedidos->estado = $estado;
+
+        $pedidos->crearPedido();
+
+        $payload = json_encode(array("mensaje" => "Pedido creado, enviado a comanda..."));
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
         $response->getBody()->write($payload);
         
@@ -46,6 +73,7 @@ class PedidosController
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public function TraerTodos($request, $response, $args)
     {
         $lista = Pedidos::obtenerTodosPedidos();
@@ -70,6 +98,9 @@ class PedidosController
     }
 
     public static function ModificarUno($request, $response, $args)
+=======
+    public function ModificarUno($request, $response, $args)
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     {
         $parametros = $request->getParsedBody();
 
@@ -99,6 +130,7 @@ class PedidosController
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public function SubirFoto($request, $response, $args)
     {
       $parametros = $request->getParsedBody();
@@ -186,5 +218,8 @@ class PedidosController
     }
 
     
+=======
+
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
 }

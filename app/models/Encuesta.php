@@ -3,9 +3,12 @@
 class Encuesta
 {
     public $id;
+<<<<<<< HEAD
     public $mesa_id;
     public $cliente;
     public $pedido_id;
+=======
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     public $mesaPuntuacion;
     public $restaurantePuntuacion;
     public $mozoPuntuacion;
@@ -13,6 +16,7 @@ class Encuesta
     public $promedioPuntuacion;
     public $comentario;
 
+<<<<<<< HEAD
     public function crearEncuesta()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
@@ -95,6 +99,8 @@ class Encuesta
 
 
 
+=======
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 }
 
 

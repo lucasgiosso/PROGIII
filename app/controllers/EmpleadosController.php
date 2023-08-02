@@ -1,5 +1,6 @@
 <?php
 require_once './models/Empleados.php';
+<<<<<<< HEAD
 require_once './models/CSV.php'; 
 
 //srequire_once './interfaces/IApiUsable.php';
@@ -38,11 +39,19 @@ class EmpleadosController extends Empleados
   
       return $response->withHeader('Content-Type', 'application/json');
   }
+=======
+//srequire_once './interfaces/IApiUsable.php';
+
+
+class EmpleadosController extends Empleados 
+{
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
     public function CargarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
 
+<<<<<<< HEAD
         $clave = $parametros['clave'];
         $rol = $parametros['rol'];
         $nombre = $parametros['nombre'];
@@ -58,6 +67,19 @@ class EmpleadosController extends Empleados
         //$empleados->fechaBaja = $fechaBaja;
         //$empleados->fechaSuspension = $fechaSuspension;
         $empleados->tipo = $tipo;
+=======
+        $rol = $parametros['rol'];
+        $nombre = $parametros['nombre'];
+        $fechaBaja = $parametros['fechaBaja'];
+        $fechaSuspension = $parametros['fechaSuspension'];
+
+        // Creamos el pedido
+        $empleados = new Empleados();
+        $empleados->rol = $rol;
+        $empleados->nombre = $nombre;
+        $empleados->fechaBaja = $fechaBaja;
+        $empleados->fechaSuspension = $fechaSuspension;
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
         
         $empleados->crearEmpleado();
 
@@ -69,6 +91,7 @@ class EmpleadosController extends Empleados
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public function TraerTodos($request, $response, $args)
     {
         $lista = Empleados::obtenerTodosEmpleados();
@@ -92,6 +115,8 @@ class EmpleadosController extends Empleados
           ->withHeader('Content-Type', 'application/json');
     }
 
+=======
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
     public function ModificarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -122,6 +147,7 @@ class EmpleadosController extends Empleados
           ->withHeader('Content-Type', 'application/json');
     }
 
+<<<<<<< HEAD
     public function PendientesCocinero($request, $response, $args)
     {       
         
@@ -233,6 +259,9 @@ class EmpleadosController extends Empleados
           ->withHeader('Content-Type', 'application/json');
     }
     
+=======
+
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
 }
 

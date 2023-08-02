@@ -2,6 +2,7 @@
 
 class Mesas
 {
+<<<<<<< HEAD
     public $mesa_id;
     public $estado_id;
     public $fechaBaja;
@@ -184,6 +185,10 @@ class Mesas
         }
     }
 
+=======
+    public $id;
+    public $estado;
+>>>>>>> a93f3d725bf13fb8677d4c7db0c5a4b59d8b5ed8
 
 }
 
